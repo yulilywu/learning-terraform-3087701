@@ -54,7 +54,7 @@ module "blog_alb" {
 
   load_balancer_type = "application"  
 
-  target_groups = {
+  target_groups = [
     {
       name_prefix      = "blog"
       protocol         = "HTTP"
@@ -67,7 +67,7 @@ module "blog_alb" {
         }
       }
     }
-  }
+  ]
 
 
   http_tcp_listeners = [
