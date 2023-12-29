@@ -54,21 +54,23 @@ module "blog_alb" {
 
   load_balancer_type = "application"  
 
-  target_groups = [
-    {
-      name_prefix      = "blog"
+  target_groups = {
+    blog-instance = {
+      name_prefix      = "blog_"
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
     }
-  ]
+  }
 
 
   listeners = { 
     blog_http = {
       port               = 80
       protocol           = "HTTP"
-      target_group_index = 0
+      forward = {
+        target_group_key = "blog-instance"
+      }
     }
   }
 
